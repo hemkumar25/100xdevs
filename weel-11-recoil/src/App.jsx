@@ -1,5 +1,5 @@
 import { RecoilRoot,atom, useRecoilValue, useSetRecoilState } from "recoil"
-import { counter } from "./store/atoms/counter"
+import { counter , evenSelector } from "./store/atoms/counter"
 
 
 function App() {
@@ -8,59 +8,54 @@ function App() {
   return (
     <>
      <RecoilRoot>
+      <Buttons/>
       <Counter/>
+      <IsEven/>
      </RecoilRoot>
     </>
   )
 }
 
 function Counter(){
-  // const[count, setCount] = useState(0)
-
-  return (
-    <>
-   <div>
-    <CurrentCount/>
-      <Increase />
-      <Decrease/>
-   </div>
-    </>
-  )
-}
-
-function CurrentCount(){
-
   const count = useRecoilValue(counter);
+
   return (
     <>
-      {count}
+    {count}
     </>
   )
 }
 
-function Decrease(){
+const  Buttons = () => {
   const setCount = useSetRecoilState(counter);
-    return(
-      <>
-        <button 
-          onClick={()=>{setCount(c=>c-1)
 
-          }}>Decrease</button>
-      </>
-    )
-}
+  function increase (){
+    setCount(c=>c+2)
+  }
 
-function Increase(){
-  const setCount = useSetRecoilState(counter);
+  function decrease(){
+    setCount(c=>c+1)
+  }
+
   return(
     <>
-      <button 
-        onClick={()=>{setCount(c=>c+1)
-          
-        }}>Increase</button>
+      <div>
+        <button onClick={increase}>Increase</button>
+        <button onClick={decrease}>Decrease</button>
+      </div>
     </>
   )
 }
 
-export default App
+const IsEven=()=>{
+  const even = useRecoilValue(evenSelector);
+
+  return(
+    <div>
+      {even?"Even":"odd"}
+    </div>
+  )
+}
+
+export default App;
 
