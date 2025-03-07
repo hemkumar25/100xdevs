@@ -1,6 +1,6 @@
-// import { atom } from "recoil";
+import { atom } from "recoil";
 
-// export const counter = atom({
-//     default:0,
-//     key:"count"
-// })
+export const counter = atom({
+	key: "counter",
+	default: 0
+})
